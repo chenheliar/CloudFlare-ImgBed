@@ -431,8 +431,8 @@ async function uploadFileToTelegram(context, fullId, metadata, fileExt, fileName
         sendFunction = {'url': 'sendAnimation', 'type': 'animation'};
     }
 
-    // 根据服务端压缩设置处理接口：从参数中获取serverCompress，如果为false，则使用sendDocument接口
-    if (url.searchParams.get('serverCompress') === 'false') {
+    // 根据服务端压缩设置处理接口：从参数中获取serverCompress，如果为false，则使用sendDocument接口，若使用PNG上传，就使用document格式
+    if (url.searchParams.get('serverCompress') === 'false' || fileExt === 'png' || fileExt === 'image/png') {
         sendFunction = {'url': 'sendDocument', 'type': 'document'};
     }
     
